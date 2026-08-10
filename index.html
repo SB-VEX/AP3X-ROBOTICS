@@ -213,9 +213,23 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
   .sbig{font-size:80px;}
 }
 
-/* LOGIN GATE */
-#login-gate{position:fixed;inset:0;background:var(--black);z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px;}
-#login-gate.hidden{display:none;}
+/* GALLERY */
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.gal-item{position:relative;background:var(--g2);aspect-ratio:4/3;overflow:hidden;cursor:pointer;border:1px solid var(--g3);}
+.gal-item img,.gal-item video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s;}
+.gal-item:hover img,.gal-item:hover video{transform:scale(1.06);}
+.gal-item .gal-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.gal-item .gal-play svg{width:44px;height:44px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));}
+.gal-item .gal-cap{position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(transparent,rgba(0,0,0,.75));font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--white);opacity:0;transition:opacity .25s;}
+.gal-item:hover .gal-cap{opacity:1;}
+.gal-empty{font-size:13px;color:var(--g5);font-family:'JetBrains Mono',monospace;letter-spacing:1px;padding:40px 0;}
+#gal-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:3000;display:none;align-items:center;justify-content:center;padding:40px;}
+#gal-lightbox.open{display:flex;}
+#gal-lightbox img,#gal-lightbox video{max-width:100%;max-height:100%;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+
+/* GALLERY LOGIN GATE */
+#gallery-gate{position:fixed;inset:0;background:var(--black);z-index:2500;display:none;align-items:center;justify-content:center;padding:24px;}
+#gallery-gate.open{display:flex;}
 .lg-box{width:100%;max-width:340px;text-align:center;}
 .lg-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;margin-bottom:6px;}
 .lg-logo span{color:var(--gold);}
@@ -227,22 +241,11 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
 .lg-btn{width:100%;margin-top:8px;}
 .lg-error{font-family:'JetBrains Mono',monospace;font-size:11px;color:#e06060;margin-top:14px;min-height:14px;opacity:0;transition:opacity .2s;}
 .lg-error.show{opacity:1;}
+.gal-close{position:absolute;top:24px;right:32px;color:var(--white);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:10px;}
+.gal-close:hover{color:var(--gold);}
 </style>
 </head>
 <body>
-
-<div id="login-gate">
-  <div class="lg-box">
-    <div class="lg-logo">AP3X <span>ROBOTICS</span></div>
-    <div class="lg-sub">Team 9863S · Members Login</div>
-    <form id="lg-form" autocomplete="off">
-      <div class="lg-field"><label>Username</label><input type="text" id="lg-user" autocomplete="username"></div>
-      <div class="lg-field"><label>Password</label><input type="password" id="lg-pass" autocomplete="current-password"></div>
-      <button type="submit" class="btn btn-gold lg-btn">Log In</button>
-      <div class="lg-error" id="lg-error">Incorrect username or password.</div>
-    </form>
-  </div>
-</div>
 
 <div class="cursor" id="cur"></div>
 <div class="cursor-ring" id="cring"></div>
@@ -257,6 +260,7 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
   <a href="#" onclick="go('watch');closeMM()">Watch</a>
   <a href="#" onclick="go('sponsors');closeMM()">Sponsors</a>
   <a href="#" onclick="go('mixmatch');closeMM()">Mix &amp; Match</a>
+  <a href="#" onclick="go('gallery');closeMM()">Gallery</a>
 </div>
 
 <!-- NAV -->
@@ -277,6 +281,7 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
     <li><a href="#" data-p="watch" onclick="go('watch')">Watch</a></li>
     <li><a href="#" data-p="sponsors" onclick="go('sponsors')">Sponsors</a></li>
     <li><a href="#" data-p="mixmatch" onclick="go('mixmatch')">Mix &amp; Match</a></li>
+    <li><a href="#" data-p="gallery" onclick="go('gallery')">Gallery</a></li>
   </ul>
   <div class="ham" id="ham" onclick="toggleMM()"><span></span><span></span><span></span></div>
 </nav>
@@ -686,27 +691,41 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
   <footer><div class="flogo">AP3X ROBOTICS</div><div class="fmeta">Team 9863S · Surrey, England</div><div class="fmeta">© 2025 AP3X ROBOTICS</div></footer>
 </div>
 
-<script>
-// LOGIN GATE
-(function(){
-  const gate=document.getElementById('login-gate');
-  const form=document.getElementById('lg-form');
-  const err=document.getElementById('lg-error');
-  if(sessionStorage.getItem('ap3x-auth')==='1'){gate.classList.add('hidden');}
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    const u=document.getElementById('lg-user').value.trim();
-    const p=document.getElementById('lg-pass').value;
-    if(u==='AP3X' && p==='ChorleyWinnersWilson'){
-      sessionStorage.setItem('ap3x-auth','1');
-      gate.classList.add('hidden');
-      err.classList.remove('show');
-    }else{
-      err.classList.add('show');
-    }
-  });
-})();
+<!-- ════════════════════ GALLERY ════════════════════ -->
+<div class="page" id="page-gallery">
+  <section class="sec" style="background:var(--g1);padding-bottom:0">
+    <div class="sec-label">Media</div>
+    <h2 class="sec-title">Gallery</h2>
+    <p style="font-size:14px;color:var(--g6);max-width:560px;margin-top:-28px;line-height:1.7">Photos and clips from builds, competitions and everything in between.</p>
+  </section>
 
+  <section class="sec" style="background:var(--black)">
+    <div class="gal-grid" id="gal-grid"></div>
+    <div class="gal-empty" id="gal-empty" style="display:none">No media yet — check back soon.</div>
+  </section>
+
+  <footer><div class="flogo">AP3X ROBOTICS</div><div class="fmeta">Team 9863S · Surrey, England</div><div class="fmeta">© 2025 AP3X ROBOTICS</div></footer>
+</div>
+
+<div id="gal-lightbox" onclick="if(event.target===this)closeLightbox()">
+  <div class="gal-close" onclick="closeLightbox()">Close ✕</div>
+  <div id="gal-lightbox-inner"></div>
+</div>
+
+<div id="gallery-gate">
+  <div class="lg-box">
+    <div class="lg-logo">AP3X <span>ROBOTICS</span></div>
+    <div class="lg-sub">Gallery · Members Login</div>
+    <form id="gal-lg-form" autocomplete="off">
+      <div class="lg-field"><label>Username</label><input type="text" id="gal-lg-user" autocomplete="username"></div>
+      <div class="lg-field"><label>Password</label><input type="password" id="gal-lg-pass" autocomplete="current-password"></div>
+      <button type="submit" class="btn btn-gold lg-btn">Log In</button>
+      <div class="lg-error" id="gal-lg-error">Incorrect username or password.</div>
+    </form>
+  </div>
+</div>
+
+<script>
 // CURSOR
 const cur=document.getElementById('cur'),ring=document.getElementById('cring');
 let mx=0,my=0,rx=0,ry=0;
@@ -732,7 +751,7 @@ function go(p){
     const np=document.getElementById('page-'+p);
     np.classList.add('active');
     window.scrollTo(0,0);
-    setTimeout(()=>{np.classList.add('visible');v.classList.remove('on');doReveal();doCountup();doProgs();},40);
+    setTimeout(()=>{np.classList.add('visible');v.classList.remove('on');doReveal();doCountup();doProgs();checkGalleryGate();},40);
   },280);
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.p===p));
   return false;
@@ -789,6 +808,72 @@ function doCountup(){
 // PROGRESS BARS
 function doProgs(){
   setTimeout(()=>{document.querySelectorAll('#page-'+cur_p+' .prog-fill').forEach(el=>el.style.width=(el.dataset.w||0)+'%');},350);
+}
+
+// ═══════════ GALLERY ═══════════
+// To add photos/videos: upload the file to your repo (e.g. in a "media" folder alongside
+// index.html), then add a line below. type is 'image' or 'video'. caption is optional.
+const mediaItems = [
+  // { src: 'media/regionals-2025.jpg', type: 'image', caption: 'Regionals 2025' },
+  // { src: 'media/robot-skills-run.mp4', type: 'video', caption: 'Skills run' },
+];
+
+function renderGallery(){
+  const grid=document.getElementById('gal-grid');
+  const empty=document.getElementById('gal-empty');
+  if(!grid) return;
+  if(!mediaItems.length){ grid.style.display='none'; empty.style.display='block'; return; }
+  grid.style.display='grid'; empty.style.display='none';
+  grid.innerHTML = mediaItems.map((m,i)=>{
+    const media = m.type==='video'
+      ? `<video src="${m.src}" muted playsinline preload="metadata"></video>`
+      : `<img src="${m.src}" alt="${m.caption||''}" loading="lazy">`;
+    const playIcon = m.type==='video'
+      ? `<div class="gal-play"><svg viewBox="0 0 24 24" fill="rgba(255,255,255,.9)"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.35)"/><path d="M10 8l6 4-6 4z"/></svg></div>` : '';
+    const cap = m.caption ? `<div class="gal-cap">${m.caption}</div>` : '';
+    return `<div class="gal-item" onclick="openLightbox(${i})">${media}${playIcon}${cap}</div>`;
+  }).join('');
+}
+
+function openLightbox(i){
+  const m = mediaItems[i];
+  const inner = document.getElementById('gal-lightbox-inner');
+  inner.innerHTML = m.type==='video'
+    ? `<video src="${m.src}" controls autoplay></video>`
+    : `<img src="${m.src}" alt="${m.caption||''}">`;
+  document.getElementById('gal-lightbox').classList.add('open');
+}
+function closeLightbox(){
+  document.getElementById('gal-lightbox').classList.remove('open');
+  document.getElementById('gal-lightbox-inner').innerHTML='';
+}
+renderGallery();
+
+// GALLERY LOGIN GATE
+(function(){
+  const gate=document.getElementById('gallery-gate');
+  const form=document.getElementById('gal-lg-form');
+  const err=document.getElementById('gal-lg-error');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    const u=document.getElementById('gal-lg-user').value.trim();
+    const p=document.getElementById('gal-lg-pass').value;
+    if(u==='AP3X' && p==='ChorleyWinnersWilson'){
+      sessionStorage.setItem('ap3x-gal-auth','1');
+      gate.classList.remove('open');
+      err.classList.remove('show');
+    }else{
+      err.classList.add('show');
+    }
+  });
+})();
+function checkGalleryGate(){
+  const gate=document.getElementById('gallery-gate');
+  if(cur_p==='gallery' && sessionStorage.getItem('ap3x-gal-auth')!=='1'){
+    gate.classList.add('open');
+  }else{
+    gate.classList.remove('open');
+  }
 }
 </script>
 </body>
