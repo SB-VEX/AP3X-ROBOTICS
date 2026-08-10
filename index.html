@@ -207,7 +207,8 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
   nav{padding:0 20px;}
   .nav-links{display:none;}
   .ham{display:flex;}
-  .nav-sponsor img{height:18px;}
+  .nav-sponsor img{height:24px;}
+  .nav-sponsor span{display:none;}
   .hero-stats{gap:24px;}
   .sbig{font-size:80px;}
 }
@@ -234,8 +235,9 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
   <div class="nav-brand" style="display:flex;align-items:center;gap:14px;">
     <div class="nav-logo" onclick="go('home')"><span></span>AP3X <span>ROBOTICS</span></div>
     <div style="width:1px;height:22px;background:rgba(201,168,76,.3);"></div>
-    <a href="https://eyecontact.uk/" target="_blank" rel="noopener" class="nav-sponsor" style="display:flex;align-items:center;background:var(--white);border-radius:6px;padding:4px 10px;text-decoration:none;">
-      <img src="eyecontact-logo.png" alt="Eye Contact Vision Clinic" style="height:22px;width:auto;display:block;">
+    <a href="https://eyecontact.uk/" target="_blank" rel="noopener" class="nav-sponsor" style="display:flex;align-items:center;gap:8px;background:var(--white);border-radius:6px;padding:5px 12px;text-decoration:none;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--g5);white-space:nowrap;">Proudly sponsored by</span>
+      <img src="eyecontact-logo.png" alt="Eye Contact Vision Clinic" style="height:32px;width:auto;display:block;">
     </a>
   </div>
   <ul class="nav-links">
@@ -255,6 +257,12 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
     <div class="hero-bg"></div><div class="hero-grid"></div>
     <div class="hero-eyebrow">Team 9863S · Surrey, England · VEX IQ Robotics</div>
     <h1 class="hero-title">AP3X<br><span class="crown">ROBOTICS</span></h1>
+    <div class="rev" style="display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin-top:8px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--g6);">Proudly sponsored by</span>
+      <a href="https://eyecontact.uk/" target="_blank" rel="noopener" style="display:flex;align-items:center;background:var(--white);border-radius:8px;padding:8px 16px;">
+        <img src="eyecontact-logo.png" alt="Eye Contact Vision Clinic" style="height:44px;width:auto;display:block;">
+      </a>
+    </div>
     <p class="hero-sub">A competitive VEX IQ robotics team from Surrey, England — building autonomous systems, engineering award-winning robots, and representing the UK on the national stage.</p>
     <div class="hero-stats">
       <div><div class="hs-num">1<span style="color:var(--g4);font-size:30px">st</span></div><div class="hs-lbl">Chorley Champions</div></div>
