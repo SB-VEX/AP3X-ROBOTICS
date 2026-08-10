@@ -56,6 +56,11 @@ nav.scrolled{background:rgba(6,6,6,.95);border-bottom-color:rgba(201,168,76,.12)
 .hs-num{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--gold);line-height:1;}
 .hs-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--g5);margin-top:4px;}
 .hero-cta{display:flex;gap:14px;margin-top:44px;flex-wrap:wrap;opacity:0;animation:fU .8s .8s forwards;}
+.hero-layout{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center;width:100%;}
+.hero-photo{position:relative;opacity:0;animation:fU .8s .5s forwards;}
+.hero-photo::before{content:'';position:absolute;top:-14px;left:-14px;right:14px;bottom:14px;border:1px solid var(--gold-d);z-index:-1;}
+.hero-photo img{width:100%;height:auto;display:block;border:1px solid var(--g4);}
+.hero-photo-cap{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--g5);margin-top:16px;}
 
 /* BUTTONS */
 .btn{padding:13px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border:none;text-decoration:none;display:inline-block;transition:all .2s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
@@ -211,6 +216,8 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
   .nav-sponsor span{display:none;}
   .hero-stats{gap:24px;}
   .sbig{font-size:80px;}
+  .hero-layout{grid-template-columns:1fr;gap:36px;}
+  .hero-photo{order:-1;}
 }
 
 /* GALLERY */
@@ -293,6 +300,8 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
 <div class="page active" id="page-home">
   <section class="hero">
     <div class="hero-bg"></div><div class="hero-grid"></div>
+    <div class="hero-layout">
+    <div class="hero-content">
     <div class="hero-eyebrow">Team 9863S &middot; Surrey, England &middot; VEX IQ Robotics</div>
     <h1 class="hero-title">AP3X<br><span class="crown">ROBOTICS</span></h1>
     <div class="rev" style="display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin-top:8px;">
@@ -314,6 +323,12 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
     <div class="hero-cta">
       <a class="btn btn-gold" href="#" onclick="go('achievements')">Our Achievements</a>
       <a class="btn btn-outline" href="#" onclick="go('sponsors')">Become a Sponsor</a>
+    </div>
+    </div>
+    <div class="hero-photo">
+      <img src="team-photo.jpg" alt="Team 9863S at the VEX IQ UK National Championship">
+      <div class="hero-photo-cap">VEX IQ UK National Championship &middot; Team 9863S</div>
+    </div>
     </div>
   </section>
 
