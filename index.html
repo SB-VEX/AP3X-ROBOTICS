@@ -212,9 +212,37 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
   .hero-stats{gap:24px;}
   .sbig{font-size:80px;}
 }
+
+/* LOGIN GATE */
+#login-gate{position:fixed;inset:0;background:var(--black);z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px;}
+#login-gate.hidden{display:none;}
+.lg-box{width:100%;max-width:340px;text-align:center;}
+.lg-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;margin-bottom:6px;}
+.lg-logo span{color:var(--gold);}
+.lg-sub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--g5);margin-bottom:36px;}
+.lg-field{margin-bottom:16px;text-align:left;}
+.lg-field label{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--g5);margin-bottom:8px;}
+.lg-field input{width:100%;background:var(--g2);border:1px solid var(--g4);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 14px;outline:none;transition:border-color .2s;}
+.lg-field input:focus{border-color:var(--gold);}
+.lg-btn{width:100%;margin-top:8px;}
+.lg-error{font-family:'JetBrains Mono',monospace;font-size:11px;color:#e06060;margin-top:14px;min-height:14px;opacity:0;transition:opacity .2s;}
+.lg-error.show{opacity:1;}
 </style>
 </head>
 <body>
+
+<div id="login-gate">
+  <div class="lg-box">
+    <div class="lg-logo">AP3X <span>ROBOTICS</span></div>
+    <div class="lg-sub">Team 9863S · Members Login</div>
+    <form id="lg-form" autocomplete="off">
+      <div class="lg-field"><label>Username</label><input type="text" id="lg-user" autocomplete="username"></div>
+      <div class="lg-field"><label>Password</label><input type="password" id="lg-pass" autocomplete="current-password"></div>
+      <button type="submit" class="btn btn-gold lg-btn">Log In</button>
+      <div class="lg-error" id="lg-error">Incorrect username or password.</div>
+    </form>
+  </div>
+</div>
 
 <div class="cursor" id="cur"></div>
 <div class="cursor-ring" id="cring"></div>
@@ -228,6 +256,7 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
   <a href="#" onclick="go('strategy');closeMM()">Strategy</a>
   <a href="#" onclick="go('watch');closeMM()">Watch</a>
   <a href="#" onclick="go('sponsors');closeMM()">Sponsors</a>
+  <a href="#" onclick="go('mixmatch');closeMM()">Mix &amp; Match</a>
 </div>
 
 <!-- NAV -->
@@ -247,6 +276,7 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
     <li><a href="#" data-p="strategy" onclick="go('strategy')">Strategy</a></li>
     <li><a href="#" data-p="watch" onclick="go('watch')">Watch</a></li>
     <li><a href="#" data-p="sponsors" onclick="go('sponsors')">Sponsors</a></li>
+    <li><a href="#" data-p="mixmatch" onclick="go('mixmatch')">Mix &amp; Match</a></li>
   </ul>
   <div class="ham" id="ham" onclick="toggleMM()"><span></span><span></span><span></span></div>
 </nav>
@@ -627,7 +657,56 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
   <footer><div class="flogo">AP3X ROBOTICS</div><div class="fmeta">Team 9863S · Surrey, England</div><div class="fmeta">© 2025 AP3X ROBOTICS</div></footer>
 </div>
 
+<!-- ════════════════════ MIX & MATCH ════════════════════ -->
+<div class="page" id="page-mixmatch">
+  <section class="sec" style="background:var(--g1);padding-bottom:0">
+    <div class="sec-label">VEX IQ · Mix &amp; Match</div>
+    <h2 class="sec-title">Mix &amp; Match</h2>
+    <p style="font-size:14px;color:var(--g6);max-width:560px;margin-top:-28px;line-height:1.7">Our record when paired into randomised alliances with robots from other teams — a true test of adaptability, communication and on-the-fly strategy.</p>
+  </section>
+
+  <div style="background:var(--g1);padding:0 80px 48px;display:flex;gap:56px;flex-wrap:wrap;border-bottom:1px solid var(--g3);">
+    <div class="rev d1"><div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--gold);line-height:1;min-width:70px">—</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--g5);margin-top:3px">Mix &amp; Match Events</div></div>
+    <div class="rev d2"><div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--gold);line-height:1;min-width:70px">—</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--g5);margin-top:3px">Best Alliance Score</div></div>
+    <div class="rev d3"><div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--gold);line-height:1;min-width:70px">—</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--g5);margin-top:3px">Alliance Wins</div></div>
+    <div class="rev d4"><div style="font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--gold);line-height:1;min-width:70px">—</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--g5);margin-top:3px">Teams Partnered With</div></div>
+  </div>
+
+  <section class="sec" style="background:var(--black)">
+    <div class="sec-label">Results</div>
+    <h2 class="sec-title">Mix &amp; Match results</h2>
+    <div class="g4">
+      <div class="card rev d1"><div class="card-event">Event name</div><div class="card-title">— pts</div><div class="card-body">Add a summary of this Mix &amp; Match round — alliance partner, final score and placement.</div></div>
+      <div class="card rev d2"><div class="card-event">Event name</div><div class="card-title">— pts</div><div class="card-body">Add a summary of this Mix &amp; Match round — alliance partner, final score and placement.</div></div>
+      <div class="card rev d3"><div class="card-event">Event name</div><div class="card-title">— pts</div><div class="card-body">Add a summary of this Mix &amp; Match round — alliance partner, final score and placement.</div></div>
+    </div>
+    <p style="font-size:11px;color:var(--g5);margin-top:24px;font-family:'JetBrains Mono',monospace;letter-spacing:1px">Stats coming soon — send over the results and we'll fill this page in.</p>
+  </section>
+
+  <footer><div class="flogo">AP3X ROBOTICS</div><div class="fmeta">Team 9863S · Surrey, England</div><div class="fmeta">© 2025 AP3X ROBOTICS</div></footer>
+</div>
+
 <script>
+// LOGIN GATE
+(function(){
+  const gate=document.getElementById('login-gate');
+  const form=document.getElementById('lg-form');
+  const err=document.getElementById('lg-error');
+  if(sessionStorage.getItem('ap3x-auth')==='1'){gate.classList.add('hidden');}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    const u=document.getElementById('lg-user').value.trim();
+    const p=document.getElementById('lg-pass').value;
+    if(u==='AP3X' && p==='ChorleyWinnersWilson'){
+      sessionStorage.setItem('ap3x-auth','1');
+      gate.classList.add('hidden');
+      err.classList.remove('show');
+    }else{
+      err.classList.add('show');
+    }
+  });
+})();
+
 // CURSOR
 const cur=document.getElementById('cur'),ring=document.getElementById('cring');
 let mx=0,my=0,rx=0,ry=0;
