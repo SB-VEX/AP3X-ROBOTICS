@@ -12,7 +12,7 @@ Official website for Team 9863S — one of England's top-ranked VEX IQ teams.
 
 ## Live Site
 
-👉 **https://sb-vex.github.io/STC_THR33CROWN3D/**
+👉 **https://sb-vex.github.io/AP3X-ROBOTICS/**
 
 ## How to update
 
