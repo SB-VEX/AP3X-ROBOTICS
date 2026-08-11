@@ -227,7 +227,10 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
   .hero-content .hero-sub{order:3;}
   .hero-content .hero-stats{order:4;}
   .hero-content .hero-cta{order:5;}
-  .hero-content .hero-sponsors{order:6;margin-top:36px !important;}
+  .hero-content .hero-sponsors{order:6;margin-top:36px !important;flex-direction:column;gap:10px !important;width:100%;}
+  .hero-sponsor-logos{width:100%;}
+  .hero-sponsors img{height:34px !important;max-width:100%;}
+  .hero-sponsors a{padding:6px 12px !important;}
 }
 
 @media(max-width:430px){
@@ -305,14 +308,16 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
     <div class="hero-content">
     <div class="hero-eyebrow">Team 9863S &middot; Surrey, England &middot; VEX IQ Robotics</div>
     <h1 class="hero-title">AP3X<br><span class="crown">ROBOTICS</span></h1>
-    <div class="hero-sponsors rev" style="display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin-top:8px;">
+    <div class="hero-sponsors rev" style="display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin-top:8px;flex-wrap:wrap;">
       <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--g6);">Proudly sponsored by</span>
-      <a href="https://eyecontact.uk/" target="_blank" rel="noopener" style="display:flex;align-items:center;background:var(--white);border-radius:8px;padding:8px 16px;">
-        <img src="eyecontact-logo.png" alt="Eye Contact Vision Clinic" style="height:44px;width:auto;display:block;">
-      </a>
-      <a href="http://www.f-w-c.com/index.php" target="_blank" rel="noopener" style="display:flex;align-items:center;background:var(--white);border-radius:8px;padding:8px 16px;">
-        <img src="futurewise-logo.png" alt="Futurewise Chartered Management Accountants" style="height:44px;width:auto;display:block;">
-      </a>
+      <div class="hero-sponsor-logos" style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;">
+        <a href="https://eyecontact.uk/" target="_blank" rel="noopener" style="display:flex;align-items:center;background:var(--white);border-radius:8px;padding:8px 16px;">
+          <img src="eyecontact-logo.png" alt="Eye Contact Vision Clinic" style="height:44px;width:auto;display:block;">
+        </a>
+        <a href="http://www.f-w-c.com/index.php" target="_blank" rel="noopener" style="display:flex;align-items:center;background:var(--white);border-radius:8px;padding:8px 16px;">
+          <img src="futurewise-logo.png" alt="Futurewise Chartered Management Accountants" style="height:44px;width:auto;display:block;">
+        </a>
+      </div>
     </div>
     <p class="hero-sub">A competitive VEX IQ robotics team from Surrey, England &mdash; building autonomous systems, engineering award-winning robots, and representing the UK on the national stage.</p>
     <div class="hero-stats">
