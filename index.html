@@ -233,21 +233,6 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
 #gal-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:3000;display:none;align-items:center;justify-content:center;padding:40px;}
 #gal-lightbox.open{display:flex;}
 #gal-lightbox img,#gal-lightbox video{max-width:100%;max-height:100%;box-shadow:0 20px 60px rgba(0,0,0,.5);}
-
-/* GALLERY LOGIN GATE */
-#gallery-gate{position:fixed;inset:0;background:var(--black);z-index:2500;display:none;align-items:center;justify-content:center;padding:24px;}
-#gallery-gate.open{display:flex;}
-.lg-box{width:100%;max-width:340px;text-align:center;}
-.lg-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;margin-bottom:6px;}
-.lg-logo span{color:var(--gold);}
-.lg-sub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--g5);margin-bottom:36px;}
-.lg-field{margin-bottom:16px;text-align:left;}
-.lg-field label{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--g5);margin-bottom:8px;}
-.lg-field input{width:100%;background:var(--g2);border:1px solid var(--g4);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 14px;outline:none;transition:border-color .2s;}
-.lg-field input:focus{border-color:var(--gold);}
-.lg-btn{width:100%;margin-top:8px;}
-.lg-error{font-family:'JetBrains Mono',monospace;font-size:11px;color:#e06060;margin-top:14px;min-height:14px;opacity:0;transition:opacity .2s;}
-.lg-error.show{opacity:1;}
 .gal-close{position:absolute;top:24px;right:32px;color:var(--white);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:10px;}
 .gal-close:hover{color:var(--gold);}
 </style>
@@ -734,19 +719,6 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
   <div id="gal-lightbox-inner"></div>
 </div>
 
-<div id="gallery-gate">
-  <div class="lg-box">
-    <div class="lg-logo">AP3X <span>ROBOTICS</span></div>
-    <div class="lg-sub">Gallery &middot; Members Login</div>
-    <form id="gal-lg-form" autocomplete="off">
-      <div class="lg-field"><label>Username</label><input type="text" id="gal-lg-user" autocomplete="username"></div>
-      <div class="lg-field"><label>Password</label><input type="password" id="gal-lg-pass" autocomplete="current-password"></div>
-      <button type="submit" class="btn btn-gold lg-btn">Log In</button>
-      <div class="lg-error" id="gal-lg-error">Incorrect username or password.</div>
-    </form>
-  </div>
-</div>
-
 <script>
 // CURSOR
 const cur=document.getElementById('cur'),ring=document.getElementById('cring');
@@ -773,7 +745,7 @@ function go(p){
     const np=document.getElementById('page-'+p);
     np.classList.add('active');
     window.scrollTo(0,0);
-    setTimeout(()=>{np.classList.add('visible');v.classList.remove('on');doReveal();doCountup();doProgs();checkGalleryGate();},40);
+    setTimeout(()=>{np.classList.add('visible');v.classList.remove('on');doReveal();doCountup();doProgs();},40);
   },280);
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.p===p));
   return false;
@@ -870,33 +842,6 @@ function closeLightbox(){
   document.getElementById('gal-lightbox-inner').innerHTML='';
 }
 renderGallery();
-
-// GALLERY LOGIN GATE
-(function(){
-  const gate=document.getElementById('gallery-gate');
-  const form=document.getElementById('gal-lg-form');
-  const err=document.getElementById('gal-lg-error');
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    const u=document.getElementById('gal-lg-user').value.trim();
-    const p=document.getElementById('gal-lg-pass').value;
-    if(u==='AP3X' && p==='ChorleyWinnersWilson'){
-      sessionStorage.setItem('ap3x-gal-auth','1');
-      gate.classList.remove('open');
-      err.classList.remove('show');
-    }else{
-      err.classList.add('show');
-    }
-  });
-})();
-function checkGalleryGate(){
-  const gate=document.getElementById('gallery-gate');
-  if(cur_p==='gallery' && sessionStorage.getItem('ap3x-gal-auth')!=='1'){
-    gate.classList.add('open');
-  }else{
-    gate.classList.remove('open');
-  }
-}
 </script>
 </body>
 </html>
