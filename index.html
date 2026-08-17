@@ -23,6 +23,10 @@ nav.scrolled{background:rgba(6,6,6,.95);border-bottom-color:rgba(201,168,76,.12)
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--gold);cursor:pointer;transition:opacity .2s;}
 .nav-logo span{color:var(--white);}
 .nav-logo:hover{opacity:.75;}
+.nav-sponsor{display:flex;align-items:center;gap:8px;padding:6px 12px;background:var(--g2);border:1px solid rgba(255,255,255,.06);text-decoration:none;transition:border-color .2s,background .2s;}
+.nav-sponsor:hover{border-color:var(--gold-d);background:var(--g3);}
+.nav-sponsor img{height:26px;width:auto;background:var(--white);padding:3px 6px;}
+.nav-sponsor span{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--g5);white-space:nowrap;}
 .nav-links{display:flex;gap:0;list-style:none;}
 .nav-links li a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--g6);text-decoration:none;padding:8px 16px;transition:color .2s;position:relative;}
 .nav-links li a::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .25s;}
@@ -287,6 +291,11 @@ footer{background:var(--g1);padding:28px 80px;display:flex;justify-content:space
 <nav id="nav">
   <div class="nav-brand" style="display:flex;align-items:center;gap:14px;">
     <div class="nav-logo" onclick="go('home')"><span></span>AP3X <span>ROBOTICS</span></div>
+    <div style="width:1px;height:22px;background:rgba(255,255,255,.1);"></div>
+    <a class="nav-sponsor" href="https://www.rightleapconsulting.com/" target="_blank" rel="noopener noreferrer">
+      <img src="rightleap-logo.png" alt="RightLeap logo">
+      <span>Sponsored by RightLeap</span>
+    </a>
   </div>
   <ul class="nav-links">
     <li><a href="#" data-p="home" onclick="go('home')">Home</a></li>
